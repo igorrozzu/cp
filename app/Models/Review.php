@@ -27,6 +27,6 @@ class Review extends Model
      */
     public function userSecure()
     {
-        return $this->hasOne(User::class, 'id', 'userId')->select(['id', 'login']);
+        return $this->user()->select(['id', 'login']);
     }
 }

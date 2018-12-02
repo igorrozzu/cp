@@ -15,11 +15,13 @@ class Cinema extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function showingMovies()
     {
-        return $this->hasMany(MovieShowing::class, 'cinemaId');
+        return $this->hasManyThrough(
+            Movie::class, MovieShowing::class, 'cinemaId', 'id'
+        );
     }
 
     /**

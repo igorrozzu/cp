@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cinema;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CinemaController extends Controller
 {
@@ -49,6 +50,8 @@ class CinemaController extends Controller
      */
     public function reviews(Cinema $cinema)
     {
-        return $cinema->reviews()->with('userSecure')->get();
+        return $cinema->reviews()->with(['user' => function(HasOne $b) {
+            $b->select(['id', 'login']);
+        }])->get();
     }
 }
