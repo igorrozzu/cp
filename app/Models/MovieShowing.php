@@ -11,7 +11,7 @@ class MovieShowing extends Model
      */
     public function cinema()
     {
-        return $this->hasOne(Cinema::class);
+        return $this->hasOne(Cinema::class, 'id', 'cinemaId');
     }
 
     /**
@@ -19,7 +19,7 @@ class MovieShowing extends Model
      */
     public function movie()
     {
-        return $this->hasOne(Movie::class);
+        return $this->hasOne(Movie::class, 'id', 'movieId');
     }
 
     /**

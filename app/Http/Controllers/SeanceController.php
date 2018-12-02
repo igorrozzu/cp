@@ -2,14 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MovieShowing;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SeanceController extends Controller
 {
-    public function testAction()
+    /**
+     * @var MovieShowing
+     */
+    private $movieShowing;
+
+    /**
+     * MovieController constructor.
+     */
+    public function __construct(MovieShowing $movieShowing)
     {
-        return User::all();
+        $this->movieShowing = $movieShowing;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function readAll(Request $request)
+    {
+        return $this->movieShowing
+            ->with(['cinema', 'seances'])
+            ->where('movieId', $request->get('movieId'))
+            ->get();
     }
 }

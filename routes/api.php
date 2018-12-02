@@ -30,16 +30,11 @@ Route::group(['prefix' => 'bookings'], function () {
     });
 });
 Route::group(['prefix' => 'seances'], function () {
-    Route::get('users', function ()    {
-        // Соответствует URL "/admin/users"
-    });
+    Route::get('/', SeanceController::class . '@readAll');
 });
-Route::group(['prefix' => 'movies/:movieId/showing'], function () {
-    Route::get('users', function ()    {
-        // Соответствует URL "/admin/users"
-    });
-});
+
 Route::group(['prefix' => 'movies'], function () {
     Route::get('/', MovieController::class . '@readAll');
     Route::get('/showing', MovieController::class . '@readAllShown');
+    Route::get('/{movie}/showing', MovieController::class . '@readAllShown');
 });
