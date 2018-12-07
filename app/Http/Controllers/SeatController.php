@@ -2,14 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Cinema;
+use App\Models\CinemaSeat;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Symfony\Component\HttpFoundation\Request;
 
 class SeatController extends Controller
 {
-    public function testAction()
+    /**
+     * @var CinemaSeat
+     */
+    private $cinemaSeat;
+
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * SeatController constructor.
+     * @param CinemaSeat $cinemaSeat
+     * @param Request $request
+     */
+    public function __construct(CinemaSeat $cinemaSeat, Request $request)
     {
-        return User::all();
+        $this->cinemaSeat = $cinemaSeat;
+        $this->request = $request;
+    }
+
+
+    /**
+     * @param Cinema $cinema
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function freeSeats(Cinema $cinema)
+    {
+        return $this->cinemaSeat->with(['booking' => function(HasOne $b) {
+            $b->where('seanceId', $this->request->get('seanceId'))->select(['id']);
+        }])->where('cinemaId', $cinema->id)->get();
     }
 }

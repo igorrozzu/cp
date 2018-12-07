@@ -10,11 +10,13 @@ export function login(data) {
     return (dispatch) => {
         axios.post(
              `${constants.URI}/auth/login`, {
-                data: data,
+                email: data.email,
+                password: data.password
             }
         ).then(response => {
+            console.log(response.data);
             const cookies = new Cookies();
-            cookies.set('connect.sid', response.data.sessionId, {
+            cookies.set('token', response.data.token, {
                 path: '/' ,
                 expires: new Date(Date.now() + 30 * 60 * 1000),
             });
@@ -47,23 +49,15 @@ export function initUser() {
 
 export function logout() {
     return (dispatch) => {
-        axios.post(
-            `${constants.URI}/auth/logout`, {
-                data: {},
-            }
-        ).then(response => {
-            const cookies = new Cookies();
-            cookies.remove('connect.sid');
-            dispatch({
-                type: ActionTypes.LOGOUT_USER,
-                payload: {isGuest: true, data: {role: roles.GUEST}}
-            });
-            dispatch({
-                type: ActionTypes.SERVER_SUCCESS,
-                payload: {message: `You has successfully logged out`}
-            });
-        }).catch(error => {
-            dispatch(errorAction(error));
+        const cookies = new Cookies();
+        cookies.remove('token');
+        dispatch({
+            type: ActionTypes.LOGOUT_USER,
+            payload: {isGuest: true, data: {role: roles.GUEST}}
+        });
+        dispatch({
+            type: ActionTypes.SERVER_SUCCESS,
+            payload: {message: `You has successfully logged out`}
         });
     }
 }

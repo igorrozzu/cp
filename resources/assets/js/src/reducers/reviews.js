@@ -5,7 +5,6 @@ const initialState = {
     isFetching: true
 };
 const reviews = (state = initialState, action) => {
-    console.log(action.payload);
     switch (action.type) {
         case ActionTypes.GET_REVIEWS_BY_CINEMA_FAILURE:
             return {

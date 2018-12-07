@@ -13,4 +13,12 @@ class CinemaSeat extends Model
     {
         return $this->hasOne(Cinema::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function booking()
+    {
+        return $this->hasOne(Booking::class, 'id', 'SeatId');
+    }
 }

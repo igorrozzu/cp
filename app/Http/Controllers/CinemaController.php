@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cinema;
+use App\Models\CinemaSeat;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Symfony\Component\HttpFoundation\Request;
 
 class CinemaController extends Controller
 {
@@ -17,14 +19,21 @@ class CinemaController extends Controller
      */
     private $cinema;
 
+    /**
+     * @var Request
+     */
+    private $request;
+
 
     /**
      * CinemaController constructor.
      * @param Cinema $cinema
+     * @param Request $request
      */
-    public function __construct(Cinema $cinema)
+    public function __construct(Cinema $cinema, Request $request)
     {
         $this->cinema = $cinema;
+        $this->request = $request;
     }
 
     /**

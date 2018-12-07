@@ -13,8 +13,9 @@
 */
 
 
-
-
-Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', AuthController::class . '@login');
+    Route::post('/check-login', AuthController::class . '@getAuthUser');
+});
