@@ -15,7 +15,5 @@ export async function getCinemaSeats(params) {
 }
 
 export async function bookCinemaSeat(data) {
-    return await axios.post(`${uri}/bookings`, {
-        data: data
-    });
+    return await axios.post(`${uri}/bookings`, data);
 }
