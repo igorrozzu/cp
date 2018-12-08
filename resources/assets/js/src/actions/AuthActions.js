@@ -57,7 +57,7 @@ export function logout() {
         });
         dispatch({
             type: ActionTypes.SERVER_SUCCESS,
-            payload: {message: `You has successfully logged out`}
+            payload: {message: `You've successfully logged out`}
         });
     }
 }

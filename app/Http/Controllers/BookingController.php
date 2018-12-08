@@ -53,6 +53,9 @@ class BookingController extends Controller
      */
     public function bookSeat(Requests\BookSeat $request)
     {
+        if (!$request->user()) {
+            abort(403);
+        }
         /**
          * @var Booking $booking
          */

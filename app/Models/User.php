@@ -14,10 +14,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $password
  * @property int $phoneNumber
  * @property int $creditCard
+ * @property bool $role
  *
  */
 class User extends Authenticatable implements JWTSubject
 {
+    const ADMIN_ROLE = 2;
+    const USER_ROLE = 1;
     /**
      * @var bool
      */

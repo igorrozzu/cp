@@ -44,9 +44,12 @@ class SeanceController extends Controller
 
     /**
      * @param Requests\CreateSeance $request
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create(Requests\CreateSeance $request)
     {
+        $this->authorizeForUser($request->user(), 'create', Seance::class);
+
         /**
          * @var Seance $seance
          */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
@@ -19,19 +20,30 @@ class UserController extends Controller
     private $user;
 
     /**
+     * @var Request
+     */
+    private $request;
+
+
+    /**
      * UserController constructor.
      * @param User $user
+     * @param Request $request
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Request $request)
     {
         $this->user = $user;
+        $this->request = $request;
     }
 
     /**
-     * @return mixed
+     * @param Request $request
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function readAll()
     {
+        $this->authorizeForUser($this->request->user(), 'readAll', User::class);
         /**
          * @var LengthAwarePaginator $paginator
          */
