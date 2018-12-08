@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cinema;
-use App\Models\CinemaSeat;
+use App\Http\Requests;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -62,5 +62,43 @@ class CinemaController extends Controller
         return $cinema->reviews()->with(['user' => function(HasOne $b) {
             $b->select(['id', 'login']);
         }])->get();
+    }
+
+    /**
+     * @param Requests\Cinema $request
+     */
+    public function create(Requests\Cinema $request)
+    {
+        /**
+         * @var Cinema $cinema
+         */
+        $cinema = $this->cinema->newInstance();
+        $cinema->address = $request->address;
+        $cinema->manager = $request->manager;
+        $cinema->name = $request->name;
+        $cinema->phone = $request->phone;
+        $cinema->save();
+    }
+
+    /**
+     * @param Cinema $cinema
+     * @param Requests\Cinema $request
+     */
+    public function update(Cinema $cinema, Requests\Cinema $request)
+    {
+        $cinema->address = $request->address;
+        $cinema->manager = $request->manager;
+        $cinema->name = $request->name;
+        $cinema->phone = $request->phone;
+        $cinema->save();
+    }
+
+    /**
+     * @param Cinema $cinema
+     * @return Cinema
+     */
+    public function getOne(Cinema $cinema)
+    {
+        return $cinema;
     }
 }

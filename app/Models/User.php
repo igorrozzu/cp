@@ -2,13 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * Class User
+ * @package App\Models
+ * @property int $id
+ * @property string $login
+ * @property string $email
+ * @property string $password
+ * @property int $phoneNumber
+ * @property int $creditCard
+ *
+ */
 class User extends Authenticatable implements JWTSubject
 {
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

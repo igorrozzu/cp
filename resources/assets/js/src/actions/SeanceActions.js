@@ -6,9 +6,7 @@ axios.defaults.withCredentials = true;
 export function addSeance(params) {
     return (dispatch) => {
         axios.post(
-            `${uri}/seances`, {
-                data: params,
-            }
+            `${uri}/seances`, params
         ).then(data => {
             dispatch({
                 type: ActionTypes.SERVER_SUCCESS,

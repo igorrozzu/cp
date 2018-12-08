@@ -21,9 +21,7 @@ export function movieAction(payload) {
 export function bindMovieToCinema(movieId, params) {
     return (dispatch) => {
         axios.post(
-            `${uri}/movies/${movieId}/showing`, {
-                data: params,
-            }
+            `${uri}/movies/${movieId}/showing`, params
         ).then(data => {
             dispatch({
                 type: ActionTypes.SERVER_SUCCESS,

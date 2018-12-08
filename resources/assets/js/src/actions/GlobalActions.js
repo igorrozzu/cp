@@ -27,12 +27,31 @@ export function getEntity(params) {
     }
 }
 
+/**
+ description
+ :
+ "123412"
+ duration
+ :
+ "123"
+ name
+ :
+ "31231"
+ rating
+ :
+ "12312"
+ slogan
+ :
+ "21312"
+
+
+ */
+
+
 export function addEntity(params) {
     return (dispatch) => {
         axios.post(
-            `${uri}/${params.entityName}`, {
-                data: params.data,
-            }
+            `${uri}/${params.entityName}`, params.data
         ).then(data => {
             dispatch({
                 type: ActionTypes.SERVER_SUCCESS,
@@ -47,9 +66,7 @@ export function addEntity(params) {
 export function updateEntity(params) {
     return (dispatch) => {
         axios.put(
-            `${uri}/${params.entityName}/${params.entityId}`, {
-                data: params.data,
-            }
+            `${uri}/${params.entityName}/${params.entityId}`, params.data
         ).then(data => {
             dispatch({
                 type: ActionTypes.SERVER_SUCCESS,

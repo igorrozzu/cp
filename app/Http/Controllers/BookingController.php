@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\MovieShowing;
-use App\Models\User;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -49,14 +49,17 @@ class BookingController extends Controller
     }
 
     /**
-     *
+     * @param Requests\BookSeat $request
      */
-    public function bookSeat()
+    public function bookSeat(Requests\BookSeat $request)
     {
         /**
          * @var Booking $booking
          */
-        $booking = $this->booking->newInstance()
+        $booking = $this->booking->newInstance();
+        $booking->seatId = $request->seatId;
+        $booking->seanceId = $request->seanceId;
+        $booking->userId = $request->user()->id;
         $booking->save();
     }
 }

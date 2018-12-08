@@ -4,8 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Cinema
+ * @package App\Models
+ * @property int $id
+ * @property string $manager
+ * @property string $address
+ * @property int $phone
+ * @property string $name
+ */
 class Cinema extends Model
 {
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

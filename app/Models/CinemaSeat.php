@@ -19,6 +19,6 @@ class CinemaSeat extends Model
      */
     public function booking()
     {
-        return $this->hasOne(Booking::class, 'id', 'SeatId');
+        return $this->hasOne(Booking::class, 'seatId', 'id');
     }
 }

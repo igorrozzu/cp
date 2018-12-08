@@ -13,7 +13,8 @@
 */
 
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('{reactRoutes}', HomeController::class . '@index')
+    ->where('reactRoutes', '^((?!api).)*$'); // except 'api' word
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', AuthController::class . '@login');

@@ -38,7 +38,7 @@ class SeatController extends Controller
     public function freeSeats(Cinema $cinema)
     {
         return $this->cinemaSeat->with(['booking' => function(HasOne $b) {
-            $b->where('seanceId', $this->request->get('seanceId'))->select(['id']);
+            $b->where('seanceId', $this->request->get('seanceId'));
         }])->where('cinemaId', $cinema->id)->get();
     }
 }

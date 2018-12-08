@@ -5,7 +5,5 @@ axios.defaults.withCredentials = true;
 
 export async function Register(data) {
 
-    return await axios.post(constants.API_URI + '/users/register', {
-        data: data
-    });
+    return await axios.post(constants.API_URI + '/users/register', data);
 }

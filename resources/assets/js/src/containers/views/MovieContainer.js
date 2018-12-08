@@ -38,8 +38,8 @@ class MovieContainer extends React.Component {
 
     async bindMovieHandler(formData) {
         const movieId = formData.movieId;
-        formData.showingFrom = moment(formData.showingFrom).format('MM-DD-YYYY');
-        formData.showingTo = moment(formData.showingTo).format('MM-DD-YYYY');
+        formData.showingFrom = moment(formData.showingFrom).format('DD-MM-YYYY');
+        formData.showingTo = moment(formData.showingTo).format('DD-MM-YYYY');
         delete formData.movieId;
         this.props.bindMovieToCinema(movieId, formData);
     };

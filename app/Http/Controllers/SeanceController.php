@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MovieShowing;
-use App\Models\User;
+use App\Http\Requests;
+use App\Models\Seance;
 use Illuminate\Http\Request;
 
 class SeanceController extends Controller
@@ -14,11 +15,19 @@ class SeanceController extends Controller
     private $movieShowing;
 
     /**
-     * MovieController constructor.
+     * @var Seance
      */
-    public function __construct(MovieShowing $movieShowing)
+    private $seance;
+
+    /**
+     * SeanceController constructor.
+     * @param Seance $seance
+     * @param MovieShowing $movieShowing
+     */
+    public function __construct(Seance $seance, MovieShowing $movieShowing)
     {
         $this->movieShowing = $movieShowing;
+        $this->seance = $seance;
     }
 
     /**
@@ -31,5 +40,20 @@ class SeanceController extends Controller
             ->with(['cinema', 'seances'])
             ->where('movieId', $request->get('movieId'))
             ->get();
+    }
+
+    /**
+     * @param Requests\CreateSeance $request
+     */
+    public function create(Requests\CreateSeance $request)
+    {
+        /**
+         * @var Seance $seance
+         */
+        $seance = $this->seance->newInstance();
+        $seance->cost = $request->cost;
+        $seance->movieShowingId = $request->movieShowingId;
+        $seance->showingDate = $request->showingDate;
+        $seance->save();
     }
 }
